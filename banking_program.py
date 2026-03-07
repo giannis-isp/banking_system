@@ -5,16 +5,13 @@ import string
 
 #db of users
 database = {}
+#db format: database = {username: {password: "password"}, 
+#                                  key:{"scrambled key"}}
 
 
-#signup
-username = input("Enter username: ")
-password = input("Enter password: ")
 
-def encrypt():
-        global key
-        global encrypted_pass
-        global characters
+#encryption process
+def encrypt(password):
         #encryption characters
         characters = list(string.punctuation + string.digits + string.ascii_letters + " ")
         #create a key to shuffle
@@ -27,25 +24,29 @@ def encrypt():
                 index = characters.index(letter) #finds that letter in the characters list
                 encrypted_pass += key[index] #returns the same position from the key list
 
-        return encrypted_pass
+        return encrypted_pass, key
 
 
-#storing the funciton into a variable so i can call it without printing it
-password = encrypt()
-database[username] = {
-    "password": encrypted_pass,
-    "key": key
-}
 
-def decrypt():
+#decryption process
+def decrypt(encrypted_pass, key):
         #decrypt
+        characters = list(string.punctuation + string.digits + string.ascii_letters + " ")
+        decrypted_pass = ""
         for letter in encrypted_pass:
                 index = key.index(letter)
-                password += characters[index]
-        return password
+                decrypted_pass += characters[index]
+        return decrypted_pass
 
-decrypting = decrypt()
+#signup an account
+def signup():
+        username = input("Enter a username: ")
+        password = input("Enter a password: ")
+        encrypted_pass, key = encrypt(password)
+        database[username] = {"password": encrypted_pass,
+                                "key": key}
+        
+        print(f"Hello, {username}, you have successfully created your account!")
 
-stored_pass = database[username][password]#accesses the database with the username key
-stored_key = database[username][key]#accesses the encryption key of that password
-
+#calling and starting the signing up an account function
+signup()
