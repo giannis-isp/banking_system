@@ -46,7 +46,5 @@ def signup():
         database[username] = {"password": encrypted_pass,
                                 "key": key}
         
-        print(f"Hello, {username}, you have successfully created your account!")
+        print(f"Hello, {username}, you have successfully created your account! \n")
 
-
-signup()
