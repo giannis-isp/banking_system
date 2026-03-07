@@ -38,7 +38,7 @@ def decrypt(encrypted_pass, key):
                 decrypted_pass += characters[index]
         return decrypted_pass
 
-#signup an account
+
 def signup():
         username = input("Enter a username: ")
         password = input("Enter a password: ")
@@ -48,5 +48,5 @@ def signup():
         
         print(f"Hello, {username}, you have successfully created your account!")
 
-#calling and starting the signing up an account function
+
 signup()
