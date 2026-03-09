@@ -2,7 +2,8 @@
 #modules for password encryption
 import random
 import string
-
+#import getpass module to hide password characters while typing
+import getpass
 #db of users
 database = {}
 #db format: database = {username: {password: "password"}, 
@@ -41,7 +42,7 @@ def decrypt(encrypted_pass, key):
 
 def signup():
         username = input("Enter a username: ")
-        password = input("Enter a password: ")
+        password = getpass.getpass("Enter a password: ") #hiding password input
         encrypted_pass, key = encrypt(password)
         database[username] = {"password": encrypted_pass,
                                 "key": key}
