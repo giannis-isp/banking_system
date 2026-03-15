@@ -2,8 +2,10 @@
 #modules for password encryption
 import random
 import string
-#import getpass module to hide password characters while typing
+#getpass to hide password while typing it
 import getpass
+
+
 #db of users
 database = {}
 #db format: database = {username: {password: "password"}, 
@@ -41,11 +43,21 @@ def decrypt(encrypted_pass, key):
 
 
 def signup():
-        username = input("Enter a username: ")
-        password = getpass.getpass("Enter a password: ") #hiding password input
+        while True:
+                username = input("Enter a username: ") #asks for a username 
+                if username in database: #checks the db if the username already exists
+                        print("Username already exists, Try anonther")
+                        break
+                else: #if it doesnt, then it proceeds to ask for the pass
+                        continue
+
+
+        password = getpass.getpass("Enter a password: ") #hiding the password input
         encrypted_pass, key = encrypt(password)
         database[username] = {"password": encrypted_pass,
-                                "key": key}
+                                "key": key,
+                                "balance": 0}
         
         print(f"Hello, {username}, you have successfully created your account! \n")
+
 
