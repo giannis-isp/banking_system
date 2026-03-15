@@ -4,7 +4,7 @@ class ATM:
     def __init__(self, user):
         self.balance = database[user]["balance"] #takes the users balance from the db
         self.user = user
-        print(f"{user}, your current balance is {database[user]["balance"]} €")#shows the balance
+       
 
     def withdraw(self, money):
         if money > self.balance:
